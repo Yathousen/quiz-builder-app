@@ -9,7 +9,7 @@ const Question = ({ data: { number, name, types, options }, onChange, onDelete, 
   return (
     <div className={`flex flex-col mt-4 bg-slate-100 rounded-lg p-4`}>
       {editable && (
-        <div className='flex flex-row justify-between'>
+        <div className='flex flex-row justify-between mb-4'>
           <p className='text-md font-medium text-gray-600'>Question #{number}</p>
           <CloseButton onClick={onDelete} />
         </div>
