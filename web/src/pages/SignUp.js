@@ -53,8 +53,8 @@ const SignUp = () => {
   }, [showError, invalidEmail, invalidPassword, invalidPasswordRepeat]);
 
   return (
-    <div className='flex justify-center content-center align-middle items-center w-full h-screen bg-slate-200'>
-      <div className='flex w-full md:w-8/12 h-screen md:h-fit mx-auto overflow-hidden bg-white rounded-lg shadow-lg'>
+    <div className='flex justify-center content-center align-middle items-center w-full min-h-screen pb-8 bg-slate-200'>
+      <div className='flex w-full md:w-8/12 min-h-screen pb-8 md:h-fit mx-auto overflow-hidden bg-white rounded-lg shadow-lg'>
         <div
           className='hidden bg-center lg:block lg:w-1/2'
           style={{
