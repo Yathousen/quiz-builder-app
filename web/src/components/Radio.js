@@ -12,8 +12,8 @@ const Radio = ({ onChange, name, options = [], disabled, ...rest }) => {
   );
 
   return (
-    <div classNameName='mt-4'>
-      <label classNameName='block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200' htmlFor={name}>
+    <div className='mt-4'>
+      <label className='block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200' htmlFor={name}>
         {name}
       </label>
       {options.map((o, i) => (
@@ -22,14 +22,14 @@ const Radio = ({ onChange, name, options = [], disabled, ...rest }) => {
             key={i}
             type='radio'
             value='USA'
-            className='w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600'
+            className='w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600 cursor-pointer'
             aria-labelledby='country-option-1'
             aria-describedby='country-option-1'
             checked={o.selected}
             onChange={onSelect(i)}
           />
           <label
-            className='block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+            className='block ml-2 text-sm text-gray-900 dark:text-gray-300 cursor-pointer'
             onClick={() => onSelect(i)({ target: { checked: !o.selected } })}
           >
             {o.name}
