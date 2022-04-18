@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Button, Skeleton } from '../components';
+import { Button, Checkbox, Radio, Skeleton } from '../components';
 import { AuthContext } from '../context';
 import { Firebase } from '../services';
 
-const QuizEdit = () => {
+const QuizEdit = ({ id }) => {
   const [loading, setLoading] = useState(false);
+  const [options, setOptions] = useState([{name: 'Test 1'},{name: 'Test 2'},{name: 'Test 3'}]);
   const { session } = useContext(AuthContext);
 
   return (
@@ -17,10 +18,12 @@ const QuizEdit = () => {
 
         
         <div className='mt-6 md:w-8/12 mx-auto'>
-          <h3 className="text-1xl font-bold text-slate-500">Your Quizzes</h3>
+          <h3 className="text-1xl font-bold text-slate-500">{`${id ? 'Edit' : 'Create new '} quiz`}</h3>
         </div>
-        <div className='mt-6 md:w-8/12 mx-auto'>
-        <Skeleton/>
+        
+        <div className='flex flex-col w-full md:w-8/12 mx-auto overflow-hidden bg-white rounded-lg shadow-sm mt-6 content-center justify-center p-8'>
+          <Checkbox name="text" options={options} onChange={setOptions}/>
+          <Radio name="text" options={options} onChange={setOptions}/>
         </div>
       </div>
     </div>
