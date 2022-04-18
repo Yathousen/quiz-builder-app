@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { Button, Checkbox, Input, Question, Radio, Skeleton, Toggle } from '../components';
 import { AuthContext } from '../context';
 import { Firebase } from '../services';
@@ -21,7 +21,6 @@ const DEFAULT_QUESTION = {
 const QuizEdit = ({ id }) => {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('');
-  const [types, setTypes] = useState([{ name: 'Single correct answer' }, { name: 'Select all correct answers' }]);
   const [publish, setPublish] = useState(false);
   const [questions, setQuestions] = useState([DEFAULT_QUESTION]);
   const onQuestionChange = useCallback(
@@ -46,6 +45,29 @@ const QuizEdit = ({ id }) => {
     (i) => () => questions.length > MINIMUM ? setQuestions(questions.filter((q, ii) => i !== ii)) : null,
     [questions],
   );
+
+  const error = useMemo(() => {
+    if (!name) {
+      return 'Error: Name cannot be empty';
+    }
+    if (
+      questions
+        .map((q) => {
+          if (!q.name) return false;
+          if (q.options.map((q) => q.name).filter((valid) => valid).length !== q.options.length) {
+            return false;
+          }
+          if (q.options.filter((q) => q.selected).length < 1) {
+            return false;
+          }
+          return true;
+        })
+        .filter((valid) => valid).length !== questions.length
+    ) {
+      return 'Error: Some questions are incomplete';
+    }
+    return;
+  }, [name, questions]);
 
   const { session } = useContext(AuthContext);
 
@@ -85,8 +107,9 @@ const QuizEdit = ({ id }) => {
               editable
             />
           ))}
-          <div className='mt-6 flex flex-row-reverse'>
-            <Button className='w-24 bg-green-600 hover:bg-green-600 focus:bg-green-600' text='Save' />
+          <div className='mt-6 flex justify-between'>
+            <p className='mt-3 font-medium text-red-400'>{error}</p>
+            <Button className='w-24 bg-green-600 hover:bg-green-600 focus:bg-green-600' text='Save' disabled={error} />
           </div>
         </div>
       </div>
