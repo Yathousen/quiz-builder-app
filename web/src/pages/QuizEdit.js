@@ -6,7 +6,7 @@ import { Firebase } from '../services';
 const QuizEdit = ({ id }) => {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('');
-  const [type, setTypes] = useState([{ name: 'Single correct answer' }, { name: 'Select all correct answers' }]);
+  const [types, setTypes] = useState([{ name: 'Single correct answer' }, { name: 'Select all correct answers' }]);
   const [publish, setPublish] = useState(false);
   const { session } = useContext(AuthContext);
 
@@ -21,11 +21,10 @@ const QuizEdit = ({ id }) => {
         <div className='mt-6 md:w-8/12 mx-auto'>
           <h3 className='text-1xl font-bold text-slate-500'>{`${id ? 'Edit' : 'Create new '} quiz`}</h3>
         </div>
-
         <div className='flex flex-col w-full md:w-8/12 mx-auto overflow-hidden bg-white rounded-lg shadow-sm mt-6 content-center justify-center p-8'>
           <Input name='Name' onChange={setName} value={name} />
-          <Radio name='Type' options={type} onChange={setTypes} />
           <Toggle name='Publish' value={publish} onChange={setPublish} />
+          <Radio name='Type' options={types} onChange={setTypes} editable/>
           <div className='mt-6 flex flex-row-reverse'>
             <Button className='w-24' text='Save' />
           </div>
