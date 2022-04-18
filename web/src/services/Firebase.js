@@ -6,6 +6,7 @@ import {
   connectAuthEmulator,
   onAuthStateChanged,
   updateProfile,
+  signOut,
 } from 'firebase/auth';
 import { getFirestore as Firestore, connectFirestoreEmulator } from 'firebase/firestore';
 
@@ -27,6 +28,7 @@ const Firebase = {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   updateProfile,
+  signOut,
 };
 
 connectAuthEmulator(Auth(), 'http://localhost:8080');

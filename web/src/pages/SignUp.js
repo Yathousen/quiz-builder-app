@@ -64,6 +64,7 @@ const SignUp = () => {
 
         <div className='w-full px-6 py-8 md:px-8 lg:w-1/2'>
           <h2 className='text-2xl font-semibold text-center text-gray-700 dark:text-white'>Quiz Builder</h2>
+          <p className='text-sm text-slate-600 text-center mb-2'>by Yamil Garcia Hernandez</p>
 
           <p className='text-xl text-center text-gray-600 dark:text-gray-200'>Welcome back!</p>
           <Alert show={error.show} text={error.text} error />
