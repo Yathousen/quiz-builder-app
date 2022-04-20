@@ -5,7 +5,7 @@ import Button from './Button';
 const MINIMUM = 1;
 const LIMIT = 5;
 
-const Checkbox = ({ onChange, onQuestionNameChange, name, options = [], editable, disabled }) => {
+const Checkbox = ({ onChange, onQuestionNameChange, name, options = [], editable, disabled, help }) => {
   const onSelect = useCallback(
     (i) => (e) => {
       let nOptions = [...options];
@@ -42,9 +42,16 @@ const Checkbox = ({ onChange, onQuestionNameChange, name, options = [], editable
           />
         </div>
       ) : (
-        <label className='block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200' htmlFor={name}>
-          {name}
-        </label>
+        <>
+          <label className='block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200' htmlFor={name}>
+            {name}
+          </label>
+          {help && (
+            <label className='block mb-2 text-xs text-black' htmlFor={name}>
+              (Select all correct answers)
+            </label>
+          )}
+        </>
       )}
       {options.map((o, i) => (
         <div className='flex items-center mt-4'>
@@ -68,7 +75,7 @@ const Checkbox = ({ onChange, onQuestionNameChange, name, options = [], editable
           ) : (
             <label
               className='ml-3 text-sm text-gray-900 dark:text-gray-300 cursor-pointer'
-              onClick={() => !disabled ? onSelect(i)({ target: { checked: !o.selected } }) : null}
+              onClick={() => (!disabled ? onSelect(i)({ target: { checked: !o.selected } }) : null)}
             >
               {o.name}
             </label>

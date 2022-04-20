@@ -106,7 +106,7 @@ const QuizEdit = () => {
                   </div>
 
                   {userQuestions.map((q, i) => (
-                    <Question data={{ ...q, number: i + 1 }} onChange={onQuestionChange(i)} />
+                    <Question data={{ ...q, number: i + 1 }} onChange={onQuestionChange(i)} help/>
                   ))}
                   <div className='mt-6 flex justify-between'>
                     <p className='mt-3 font-medium text-red-400'>{error}</p>

@@ -205,6 +205,7 @@ const QuizEdit = () => {
                 onDelete={onQuestionDelete(i)}
                 editable={!publicKey}
                 disabled={publicKey}
+                help={publicKey}
               />
             ))}
             <div className='mt-6 flex justify-between'>

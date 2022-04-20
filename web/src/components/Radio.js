@@ -5,7 +5,7 @@ import CloseButton from './CloseButton';
 const MINIMUM = 1;
 const LIMIT = 5;
 
-const Radio = ({ onChange, onQuestionNameChange, name, options = [], editable, disabled }) => {
+const Radio = ({ onChange, onQuestionNameChange, name, options = [], editable, disabled, help }) => {
   const onSelect = useCallback(
     (i) => (e) => {
       let nOptions = [...options].map((o, ii) =>
@@ -43,9 +43,16 @@ const Radio = ({ onChange, onQuestionNameChange, name, options = [], editable, d
           />
         </div>
       ) : (
-        <label className='block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200' htmlFor={name}>
-          {name}
-        </label>
+        <>
+          <label className='block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200' htmlFor={name}>
+            {name}
+          </label>
+          {help && (
+            <label className='block mb-2 text-xs text-black' htmlFor={name}>
+              (Single correct answer)
+            </label>
+          )}
+        </>
       )}
       {options.map((o, i) => (
         <div className='flex items-center mt-4'>
@@ -69,7 +76,7 @@ const Radio = ({ onChange, onQuestionNameChange, name, options = [], editable, d
           ) : (
             <label
               className='block w-fit ml-2 text-sm text-gray-900 dark:text-gray-300 cursor-pointer'
-              onClick={() => !disabled ? onSelect(i)({ target: { checked: o.selected || !o.selected } }) : null}
+              onClick={() => (!disabled ? onSelect(i)({ target: { checked: o.selected || !o.selected } }) : null)}
             >
               {o.name}
             </label>
