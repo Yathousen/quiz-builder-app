@@ -27,7 +27,10 @@ const Breadcrumbs = ({ data = [] }) => {
       {data.map((s, i) => (
         <>
           <Separator />
-          <a className='text-gray-600 dark:text-gray-200 cursor-pointer hover:underline' onClick={() => (s.ref ? navigate(s.ref) : null)}>
+          <a
+            className='text-gray-600 dark:text-gray-200 cursor-pointer hover:underline'
+            onClick={() => (s.ref ? navigate(s.ref) : null)}
+          >
             {s.name}
           </a>
         </>

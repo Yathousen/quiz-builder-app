@@ -1,0 +1,206 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Disabled Radio 1`] = `
+<div
+  className=""
+>
+  <label
+    className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
+    htmlFor="Question 1"
+  >
+    Question 1
+  </label>
+  <div
+    className="flex items-center mt-4"
+  >
+    <input
+      checked={true}
+      className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
+      onChange={null}
+      type="radio"
+    />
+    <label
+      className="block w-fit ml-2 text-sm text-gray-900 dark:text-gray-300 cursor-pointer"
+      onClick={[Function]}
+    >
+      Answer 1
+    </label>
+  </div>
+  <div
+    className="flex items-center mt-4"
+  >
+    <input
+      checked={false}
+      className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
+      onChange={null}
+      type="radio"
+    />
+    <label
+      className="block w-fit ml-2 text-sm text-gray-900 dark:text-gray-300 cursor-pointer"
+      onClick={[Function]}
+    >
+      Answer 2
+    </label>
+  </div>
+</div>
+`;
+
+exports[`Editable Radio 1`] = `
+<div
+  className="mt-4 bg-white rounded-lg p-4"
+>
+  <div
+    className="flex flex-row flex-1"
+  >
+    <input
+      className="flex-1 block text-sm font-medium text-gray-600 dark:text-gray-300 border-b-2 border-transparent appearance-none focus:outline-none focus:ring-0 focus:border-blue-400 peer"
+      onChange={[Function]}
+      value="Question 1"
+    />
+  </div>
+  <div
+    className="flex items-center mt-4"
+  >
+    <input
+      checked={true}
+      className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
+      onChange={[Function]}
+      type="radio"
+    />
+    <div
+      className="flex flex-row flex-1"
+    >
+      <input
+        className="flex-1 block ml-2 text-sm text-gray-900 dark:text-gray-300 border-b-2 border-transparent appearance-none focus:outline-none focus:ring-0 focus:border-blue-400 peer"
+        onChange={[Function]}
+        value="Answer 1"
+      />
+      <button
+        className="bg-white rounded-md ml-1 p-1 inline-flex items-center justify-center text-gray-400 hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 undefined"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          className="h-4 w-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M6 18L18 6M6 6l12 12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div
+    className="flex items-center mt-4"
+  >
+    <input
+      checked={false}
+      className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
+      onChange={[Function]}
+      type="radio"
+    />
+    <div
+      className="flex flex-row flex-1"
+    >
+      <input
+        className="flex-1 block ml-2 text-sm text-gray-900 dark:text-gray-300 border-b-2 border-transparent appearance-none focus:outline-none focus:ring-0 focus:border-blue-400 peer"
+        onChange={[Function]}
+        value="Answer 2"
+      />
+      <button
+        className="bg-white rounded-md ml-1 p-1 inline-flex items-center justify-center text-gray-400 hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 undefined"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          className="h-4 w-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M6 18L18 6M6 6l12 12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div
+    className="mt-6 flex"
+  >
+    <div
+      className="flex flex-1 flex-row-reverse"
+    >
+      <button
+        className="disabled:bg-gray-500 w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-700 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600 w-24 text-xs"
+        onClick={[Function]}
+      >
+        Add
+      </button>
+      <p
+        className="mt-2 mr-2 text-xs"
+      >
+        2/5 possible answers
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Radio 1`] = `
+<div
+  className=""
+>
+  <label
+    className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
+    htmlFor="Question 1"
+  >
+    Question 1
+  </label>
+  <div
+    className="flex items-center mt-4"
+  >
+    <input
+      checked={true}
+      className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
+      onChange={[Function]}
+      type="radio"
+    />
+    <label
+      className="block w-fit ml-2 text-sm text-gray-900 dark:text-gray-300 cursor-pointer"
+      onClick={[Function]}
+    >
+      Answer 1
+    </label>
+  </div>
+  <div
+    className="flex items-center mt-4"
+  >
+    <input
+      checked={false}
+      className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
+      onChange={[Function]}
+      type="radio"
+    />
+    <label
+      className="block w-fit ml-2 text-sm text-gray-900 dark:text-gray-300 cursor-pointer"
+      onClick={[Function]}
+    >
+      Answer 2
+    </label>
+  </div>
+</div>
+`;
