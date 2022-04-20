@@ -1,16 +1,6 @@
-import { initializeApp } from 'firebase/app';
-import {
-  getAuth as Auth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  connectAuthEmulator,
-  onAuthStateChanged,
-  updateProfile,
-  signOut,
-} from 'firebase/auth';
-import { getFirestore as Firestore, connectFirestoreEmulator } from 'firebase/firestore';
+import Firebase from 'firebase';
 
-const firebaseConfig = {
+Firebase.initializeApp({
   apiKey: 'AIzaSyDcxnmvYxSPML7DhhS_WLfTaqPxktTVKq4',
   authDomain: 'quiz-builder-app.firebaseapp.com',
   projectId: 'quiz-builder-app',
@@ -18,20 +8,9 @@ const firebaseConfig = {
   messagingSenderId: '858857180971',
   appId: '1:858857180971:web:e439951c497a43e8ab7f6e',
   measurementId: 'G-7DVQ8ZGXRH',
-};
+});
 
-const Firebase = {
-  Firebase: initializeApp(firebaseConfig),
-  Auth,
-  Firestore,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  updateProfile,
-  signOut,
-};
-
-connectAuthEmulator(Auth(), 'http://localhost:8080');
-connectFirestoreEmulator(Firestore(), 'http://localhost:8081');
+Firebase.auth().useEmulator('http://localhost:8080');
+Firebase.firestore().useEmulator('localhost', 8081);
 
 export default Firebase;

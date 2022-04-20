@@ -13,8 +13,7 @@ const Login = () => {
     setLoading(true);
     setShowError(false);
     try {
-      await Firebase.signInWithEmailAndPassword(
-        Firebase.Auth(),
+      await Firebase.auth().signInWithEmailAndPassword(
         email,
         password,
       );

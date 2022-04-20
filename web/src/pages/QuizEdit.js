@@ -1,7 +1,10 @@
+import { Firestore } from 'firebase/firestore';
 import React, { useCallback, useContext, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Breadcrumbs, Button, Checkbox, Input, Question, Radio, Skeleton, Toggle } from '../components';
 import { AuthContext } from '../context';
 import { Firebase } from '../services';
+import { generateKey } from '../utils';
 
 const MINIMUM = 1;
 const LIMIT = 10;
@@ -19,9 +22,11 @@ const DEFAULT_QUESTION = {
 };
 
 const QuizEdit = ({ id }) => {
+  const { session } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('');
-  const [publish, setPublish] = useState(false);
+  const [published, setPublished] = useState(false);
   const [questions, setQuestions] = useState([DEFAULT_QUESTION]);
   const onQuestionChange = useCallback(
     (i) => (data) => {
@@ -69,7 +74,40 @@ const QuizEdit = ({ id }) => {
     return;
   }, [name, questions]);
 
-  const { session } = useContext(AuthContext);
+  const create = useCallback(async () => {
+    try {
+      let key = null;
+      if (published) {
+        key = generateKey(6);
+        let used = true;
+        do {
+          const doc = await Firebase.firestore().collection('public').doc(key).get();
+          if (doc.exists) {
+            key = generateKey(6);
+          } else {
+            used = false;
+          }
+        } while (used);
+        await Firebase.firestore().collection('public').doc(key).set({
+          name,
+          questions,
+          createdBy: session.uid,
+          createdAt: Firebase.firestore.FieldValue.serverTimestamp(),
+        });
+      }
+      await Firebase.firestore().collection('private').doc(session.uid).collection('quizzes').add({
+        name,
+        published,
+        questions,
+        key,
+        createdAt: Firebase.firestore.FieldValue.serverTimestamp(),
+      });
+      navigate('/dashboard');
+    } catch (ex) {
+      alert('An error has occured, please try again');
+      console.log(ex);
+    }
+  }, [session.uid, name, published, questions, navigate]);
 
   return (
     <div className='flex justify-center content-center align-middle w-full min-min-h-screen pb-8 pb-8 bg-slate-200'>
@@ -85,7 +123,7 @@ const QuizEdit = ({ id }) => {
         </div>
         <div className='flex flex-col w-full md:w-8/12 mx-auto overflow-hidden bg-white rounded-lg shadow-sm mt-6 content-center justify-center p-8'>
           <Input name='Name' onChange={setName} value={name} />
-          <Toggle name='Publish' value={publish} onChange={setPublish} />
+          <Toggle name='Publish' value={published} onChange={setPublished} />
 
           <div className='flex mt-4 justify-between'>
             <label className='mt-2 text-sm font-medium text-gray-600 dark:text-gray-200' htmlFor={name}>
@@ -110,7 +148,12 @@ const QuizEdit = ({ id }) => {
           ))}
           <div className='mt-6 flex justify-between'>
             <p className='mt-3 font-medium text-red-400'>{error}</p>
-            <Button className='w-24 bg-green-600 hover:bg-green-600 focus:bg-green-600' text='Save' disabled={error} />
+            <Button
+              className='w-24 bg-green-600 hover:bg-green-600 focus:bg-green-600'
+              text='Save'
+              disabled={error}
+              onClick={create}
+            />
           </div>
         </div>
       </div>

@@ -15,8 +15,8 @@ const SignUp = () => {
     setLoading(true);
     setShowError(false);
     try {
-      await Firebase.createUserWithEmailAndPassword(Firebase.Auth(), email, password);
-      await Firebase.updateProfile(Firebase.Auth().currentUser, { photoURL: toSvg(email, 100) });
+      await Firebase.auth().createUserWithEmailAndPassword(email, password);
+      await Firebase.auth().currentUser.updateProfile({ photoURL: toSvg(email, 100) });
     } catch (ex) {
       setShowError(true);
     }

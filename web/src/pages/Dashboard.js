@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   const logout = useCallback(async () => {
     if (window.confirm('Are you use you want to logout?')) {
-      await Firebase.signOut(Firebase.Auth());
+      await Firebase.auth().signOut();
     }
   }, []);
 

@@ -8,9 +8,9 @@ const AuthContext = (props) => {
   const [auth, setAuth] = useState({ loading: true });
 
   useEffect(() => {
-    const subscription = Firebase.onAuthStateChanged(Firebase.Auth(),(session) => {
+    const subscription = Firebase.auth().onAuthStateChanged((session) => {
       if (session) {
-        Firebase.Auth()
+        Firebase.auth()
           .currentUser.getIdTokenResult()
           .then((token) => {
             setAuth({ session, token, loading: false });
