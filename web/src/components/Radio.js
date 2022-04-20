@@ -86,7 +86,7 @@ const Radio = ({ onChange, onQuestionNameChange, name, options = [], editable, d
                 options.length < LIMIT ? onChange([...options, { name: `Answer ${options.length + 1}` }]) : null
               }
             />
-            <p className='mt-2 mr-2 text-xs'>{`${options.length}/${LIMIT} answers`}</p>
+            <p className='mt-2 mr-2 text-xs'>{`${options.length}/${LIMIT} possible answers`}</p>
           </div>
         </div>
       )}

@@ -85,7 +85,7 @@ const Checkbox = ({ onChange, onQuestionNameChange, name, options = [], editable
                 options.length < LIMIT ? onChange([...options, { name: `Answer ${options.length + 1}` }]) : null
               }
             />
-            <p className='mt-2 mr-2 text-xs'>{`${options.length}/${LIMIT} answers`}</p>
+            <p className='mt-2 mr-2 text-xs'>{`${options.length}/${LIMIT} possible answers`}</p>
           </div>
         </div>
       )}

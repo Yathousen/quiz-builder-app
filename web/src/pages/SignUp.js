@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { toSvg } from "jdenticon";
+import md5 from 'md5';
 import QuizImg from '../assets/quiz.jpg';
 import { Firebase } from '../services';
 import { Alert } from '../components';
@@ -16,7 +16,7 @@ const SignUp = () => {
     setShowError(false);
     try {
       await Firebase.auth().createUserWithEmailAndPassword(email, password);
-      await Firebase.auth().currentUser.updateProfile({ photoURL: toSvg(email, 100) });
+      await Firebase.auth().currentUser.updateProfile({ photoURL: `https://gravatar.com/avatar/${md5(email)}?s=400&d=identicon&r=x` });
     } catch (ex) {
       setShowError(true);
     }
@@ -54,7 +54,7 @@ const SignUp = () => {
 
   return (
     <div className='flex justify-center content-center align-middle items-center w-full min-h-screen pb-8 bg-slate-200'>
-      <div className='flex w-full md:w-8/12 md:h-fit mx-auto overflow-hidden bg-white rounded-lg shadow-lg'>
+      <div className='flex w-11/12 md:w-8/12 md:h-fit mx-auto overflow-hidden bg-white rounded-lg shadow-lg'>
         <div
           className='hidden bg-center lg:block lg:w-1/2'
           style={{

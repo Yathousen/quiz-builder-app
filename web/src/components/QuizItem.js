@@ -18,7 +18,7 @@ const QuizItem = ({ data: { id, name, published, questions, createdAt, key } }) 
   );
 
   return (
-    <div className='mt-4 max-w-2xl px-4 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800'>
+    <div className='mt-4 px-4 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800'>
       <div className='flex items-center justify-between'>
         <a
           onClick={() => navigate(`/edit/${id}`)}
