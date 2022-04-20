@@ -9,7 +9,7 @@ const MINIMUM = 1;
 const LIMIT = 10;
 
 const DEFAULT_QUESTION = {
-  name: 'Question Title',
+  name: 'Question Text',
   types: [
     { name: 'Single correct answer', selected: true },
     { name: 'Select all correct answers', selected: false },
@@ -78,7 +78,7 @@ const QuizEdit = () => {
 
   const error = useMemo(() => {
     if (!name) {
-      return 'Name cannot be empty';
+      return 'Title cannot be empty';
     }
     if (
       questions
@@ -180,7 +180,7 @@ const QuizEdit = () => {
         )}
         {!loading && (
           <div className='flex flex-col w-11/12 md:w-8/12 mx-auto overflow-hidden bg-white rounded-lg shadow-sm mt-6 content-center justify-center p-8'>
-            <Input name='Name' onChange={setName} value={name} disabled={publicKey} />
+            <Input name='Title' onChange={setName} value={name} disabled={publicKey} />
             <Toggle name='Publish' value={published} onChange={setPublished} disabled={publicKey} />
 
             <div className='flex mt-4 justify-between'>
