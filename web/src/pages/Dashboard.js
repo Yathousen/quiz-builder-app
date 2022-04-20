@@ -63,7 +63,8 @@ const Dashboard = () => {
           <Button className='w-28 text-sm' text='Create Quiz' onClick={() => navigate('/edit')} />
         </div>
         <div className='mt-6 md:w-8/12 mx-auto'>
-          {loading ? <Skeleton /> : quizzes.map(q => <QuizItem data={q}/>)}
+          {loading && <Skeleton />}
+          {!loading && quizzes.length ? quizzes.map(q => <QuizItem data={q}/>) : <p className='py-20 text-2xl font-bold text-center text-slate-400'>No quizzes have been created</p>}
         </div>
       </div>
     </div>
