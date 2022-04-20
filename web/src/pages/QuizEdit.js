@@ -1,7 +1,6 @@
-import { Firestore } from 'firebase/firestore';
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Breadcrumbs, Button, Checkbox, Input, Question, Radio, Skeleton, Toggle } from '../components';
+import { Breadcrumbs, Button, Input, Question, Skeleton, Toggle } from '../components';
 import { AuthContext } from '../context';
 import { Firebase } from '../services';
 import { generateKey } from '../utils';
@@ -65,11 +64,12 @@ const QuizEdit = () => {
           setPublicKey(quiz.key);
           setQuestions(quiz.questions);
           setLoading(false);
-        });
+        })
+        .catch(ex => navigate('/dashboard'));
     } else {
       setLoading(false);
     }
-  }, [id, session?.uid]);
+  }, [id, session?.uid, navigate]);
 
   const onQuestionDelete = useCallback(
     (i) => () => questions.length > MINIMUM ? setQuestions(questions.filter((q, ii) => i !== ii)) : null,
@@ -78,7 +78,7 @@ const QuizEdit = () => {
 
   const error = useMemo(() => {
     if (!name) {
-      return 'Error: Name cannot be empty';
+      return 'Name cannot be empty';
     }
     if (
       questions
@@ -94,12 +94,12 @@ const QuizEdit = () => {
         })
         .filter((valid) => valid).length !== questions.length
     ) {
-      return 'Error: Some questions are incomplete';
+      return 'Some questions are incomplete';
     }
     return;
   }, [name, questions]);
 
-  const create = useCallback(async () => {
+  const save = useCallback(async () => {
     try {
       let key = null;
       const batch = Firebase.firestore().batch();
@@ -222,7 +222,7 @@ const QuizEdit = () => {
                     className='w-24 ml-2 bg-green-600 hover:bg-green-600 focus:bg-green-600'
                     text='Save'
                     disabled={error}
-                    onClick={create}
+                    onClick={save}
                   />
                 )}
               </div>
