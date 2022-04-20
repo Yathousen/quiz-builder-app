@@ -5,7 +5,7 @@ import CloseButton from './CloseButton';
 const MINIMUM = 1;
 const LIMIT = 5;
 
-const Radio = ({ onChange, onQuestionNameChange, name, options = [], editable }) => {
+const Radio = ({ onChange, onQuestionNameChange, name, options = [], editable, disabled }) => {
   const onSelect = useCallback(
     (i) => (e) => {
       let nOptions = [...options].map((o, ii) =>
@@ -54,7 +54,7 @@ const Radio = ({ onChange, onQuestionNameChange, name, options = [], editable })
             type='radio'
             className='w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600 cursor-pointer'
             checked={o.selected}
-            onChange={onSelect(i)}
+            onChange={!disabled ? onSelect(i) : null}
           />
           {editable ? (
             <div className='flex flex-row flex-1'>
@@ -69,7 +69,7 @@ const Radio = ({ onChange, onQuestionNameChange, name, options = [], editable })
           ) : (
             <label
               className='block w-fit ml-2 text-sm text-gray-900 dark:text-gray-300 cursor-pointer'
-              onClick={() => onSelect(i)({ target: { checked: o.selected || !o.selected } })}
+              onClick={() => !disabled ? onSelect(i)({ target: { checked: o.selected || !o.selected } }) : null}
             >
               {o.name}
             </label>

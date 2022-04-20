@@ -5,7 +5,7 @@ import Button from './Button';
 const MINIMUM = 1;
 const LIMIT = 5;
 
-const Checkbox = ({ onChange, onQuestionNameChange, name, options = [], editable }) => {
+const Checkbox = ({ onChange, onQuestionNameChange, name, options = [], editable, disabled }) => {
   const onSelect = useCallback(
     (i) => (e) => {
       let nOptions = [...options];
@@ -53,7 +53,7 @@ const Checkbox = ({ onChange, onQuestionNameChange, name, options = [], editable
             type='checkbox'
             className='w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 cursor-pointer'
             checked={o.selected}
-            onChange={onSelect(i)}
+            onChange={!disabled ? onSelect(i) : null}
           />
           {editable ? (
             <div className='flex flex-row flex-1'>
@@ -68,7 +68,7 @@ const Checkbox = ({ onChange, onQuestionNameChange, name, options = [], editable
           ) : (
             <label
               className='ml-3 text-sm text-gray-900 dark:text-gray-300 cursor-pointer'
-              onClick={() => onSelect(i)({ target: { checked: !o.selected } })}
+              onClick={() => !disabled ? onSelect(i)({ target: { checked: !o.selected } }) : null}
             >
               {o.name}
             </label>

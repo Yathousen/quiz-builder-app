@@ -3,7 +3,7 @@ import Checkbox from './Checkbox';
 import CloseButton from './CloseButton';
 import Radio from './Radio';
 
-const Question = ({ data: { number, name, types, options }, onChange, onDelete, editable }) => {
+const Question = ({ data: { number, name, types, options }, onChange, onDelete, editable, disabled }) => {
   const type = useMemo(() => types.filter((t) => t.selected)[0].name, [types]);
   const onFieldChange = useCallback((field) => (value) => onChange({ [field]: value }), [onChange]);
   return (
@@ -22,6 +22,7 @@ const Question = ({ data: { number, name, types, options }, onChange, onDelete, 
           onQuestionNameChange={onFieldChange('name')}
           onChange={onFieldChange('options')}
           editable={editable}
+          disabled={disabled}
         />
       )}
       {type === 'Select all correct answers' && (
@@ -31,6 +32,7 @@ const Question = ({ data: { number, name, types, options }, onChange, onDelete, 
           onQuestionNameChange={onFieldChange('name')}
           onChange={onFieldChange('options')}
           editable={editable}
+          disabled={disabled}
         />
       )}
     </div>

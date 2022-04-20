@@ -25,6 +25,7 @@ const App = () => (
         <Route path='/signup' element={<AnonymousRoute element={<SignUp />} />} />
         <Route path='/dashboard' element={<AuthenticatedRoute element={<Dashboard />} />} />
         <Route path='/edit' element={<AuthenticatedRoute element={<QuizEdit />} />} />
+        <Route path='/edit/:id' element={<AuthenticatedRoute element={<QuizEdit />} />} />
         <Route path='*' element={<Navigate to='/login' replace />} />
       </Routes>
     </Router>

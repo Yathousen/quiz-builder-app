@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Toggle = ({ onChange, name, value }) => (
+const Toggle = ({ onChange, name, value, disabled }) => (
   <div className='mt-4'>
     <label className='block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200' htmlFor={name}>
       {name}
     </label>
-    <label className='mt-2 inline-flex items-center cursor-pointer' onClick={() => onChange(!value)}>
+    <label className='mt-2 inline-flex items-center cursor-pointer' onClick={() => !disabled ? onChange(!value) : null}>
       <span className='relative'>
         <span className='block w-10 h-6 bg-gray-200 rounded-full shadow-inner'></span>
         <span

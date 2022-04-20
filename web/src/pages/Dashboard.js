@@ -1,12 +1,14 @@
-import React, { useContext, useState, useCallback } from 'react';
+import React, { useContext, useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Breadcrumbs, Button, Skeleton } from '../components';
+import { Breadcrumbs, Button, QuizItem, Skeleton } from '../components';
 import { AuthContext } from '../context';
 import { Firebase } from '../services';
+import { docsToArray } from '../utils';
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [quizzes, setQuizzes] = useState([]);
   const { session } = useContext(AuthContext);
 
   const logout = useCallback(async () => {
@@ -14,6 +16,22 @@ const Dashboard = () => {
       await Firebase.auth().signOut();
     }
   }, []);
+
+  useEffect(() => {
+    let subscription;
+    if (session?.uid) {
+      setLoading(true);
+      subscription = Firebase.firestore()
+        .collection('private')
+        .doc(session.uid)
+        .collection('quizzes')
+        .onSnapshot((snapshots) => {
+          setQuizzes(docsToArray(snapshots).sort((a, b) => b.createdAt-a.createdAt));
+          setLoading(false);
+        });
+    }
+    return () => subscription && subscription();
+  }, [session?.uid]);
 
   return (
     <div className='flex justify-center content-center align-middle w-full min-h-screen pb-8 bg-slate-200'>
@@ -42,13 +60,10 @@ const Dashboard = () => {
         </div>
         <div className='mt-6 md:w-8/12 mx-auto flex justify-between'>
           <h3 className='mt-2 text-1xl font-bold text-slate-500'>Your Quizzes</h3>
-          <Button
-                className='w-28 text-sm'
-                text='Create Quiz'
-                onClick={() => navigate('/edit')}/>
+          <Button className='w-28 text-sm' text='Create Quiz' onClick={() => navigate('/edit')} />
         </div>
         <div className='mt-6 md:w-8/12 mx-auto'>
-          <Skeleton />
+          {loading ? <Skeleton /> : quizzes.map(q => <QuizItem data={q}/>)}
         </div>
       </div>
     </div>
