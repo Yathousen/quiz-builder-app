@@ -102,6 +102,7 @@ const QuizEdit = () => {
   const create = useCallback(async () => {
     try {
       let key = null;
+      const batch = Firebase.firestore().batch();
       if (published) {
         key = generateKey(6);
         let used = true;
@@ -113,7 +114,7 @@ const QuizEdit = () => {
             used = false;
           }
         } while (used);
-        await Firebase.firestore().collection('public').doc(key).set({
+        batch.set(Firebase.firestore().collection('public').doc(key), {
           name,
           questions,
           createdBy: session.uid,
@@ -121,7 +122,7 @@ const QuizEdit = () => {
         });
       }
       if (id) {
-        await Firebase.firestore().collection('private').doc(session.uid).collection('quizzes').doc(id).update({
+        batch.update(Firebase.firestore().collection('private').doc(session.uid).collection('quizzes').doc(id), {
           name,
           published,
           questions,
@@ -129,7 +130,7 @@ const QuizEdit = () => {
           updatedAt: Firebase.firestore.FieldValue.serverTimestamp(),
         });
       } else {
-        await Firebase.firestore().collection('private').doc(session.uid).collection('quizzes').add({
+        batch.set(Firebase.firestore().collection('private').doc(session.uid).collection('quizzes').doc(), {
           name,
           published,
           questions,
@@ -137,6 +138,7 @@ const QuizEdit = () => {
           createdAt: Firebase.firestore.FieldValue.serverTimestamp(),
         });
       }
+      await batch.commit();
       navigate('/dashboard');
     } catch (ex) {
       alert('An error has occurred, please try again');
@@ -146,10 +148,12 @@ const QuizEdit = () => {
   const remove = useCallback(async () => {
     try {
       if (window.confirm('Are you sure you want to delete this quiz?')) {
+        const batch = Firebase.firestore().batch();
         if (publicKey) {
-          await Firebase.firestore().collection('public').doc(publicKey).delete();
+          batch.delete(Firebase.firestore().collection('public').doc(publicKey));
         }
-        await Firebase.firestore().collection('private').doc(session.uid).collection('quizzes').doc(id).delete();
+        batch.delete(Firebase.firestore().collection('private').doc(session.uid).collection('quizzes').doc(id));
+        await batch.commit();
         navigate('/dashboard');
       }
     } catch (ex) {
