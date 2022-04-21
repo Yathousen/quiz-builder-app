@@ -6,3 +6,6 @@ to take them and see how many questions they got right.
 ## Publicly Available URL
 
 https://quiz-builder-app.web.app/
+
+## Demo Video
+[Click here](./demo-quiz-builder-app.mp4)
